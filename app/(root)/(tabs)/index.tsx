@@ -11,7 +11,7 @@ export default function Index() {
       }}
     >
       <Text className="font-bold text-lg my-10">
-        Welcome To the Home screen
+        Welcome To the Home screen here
       </Text>
       <Link href="/sign-in">Sign In</Link>
       <Link href="/explore">Explore</Link>
