@@ -40,7 +40,8 @@
             "./assets/fonts/Rubik-Bold.ttf",
             "./assets/fonts/Rubik-ExtraBold.ttf",
             "./assets/fonts/Rubik-Medium.ttf",
-            "./assets/fonts/Rubik-Light.ttf"
+            "./assets/fonts/Rubik-Light.ttf",
+            "./assets/fonts/Rubik-Regular.ttf"
           ]
         }
       ]
