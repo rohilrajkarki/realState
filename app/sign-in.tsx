@@ -51,7 +51,7 @@ const SignIn = () => {
                 resizeMode="contain"
               />
               <Text className="text-lg font-rubik-medium text-black-300 ml-2">
-                Continue with Google
+                Continue with Google auth
               </Text>
             </View>
           </TouchableOpacity>
