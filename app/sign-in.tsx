@@ -13,6 +13,10 @@ import icons from "@/constants/icons";
 
 const SignIn = () => {
   const handleLogin = async () => {};
+
+  // # appwrite email : rohil01
+  // # google console email:rohil101
+
   return (
     <SafeAreaView className="bg-white h-full">
       <ScrollView
