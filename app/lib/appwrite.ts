@@ -22,6 +22,7 @@ export const account = new Account(client);
 export async function login() {
   //Using expo linking to handling deep links and redirect URLs
   try {
+    const redirectUri = Linking.createURL();
   } catch (error) {
     console.log(error);
     return false;
