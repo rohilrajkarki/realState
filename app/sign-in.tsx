@@ -5,14 +5,24 @@ import {
   ScrollView,
   Button,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
+import { login } from "./lib/appwrite";
 
 const SignIn = () => {
-  const handleLogin = async () => {};
+  const handleLogin = async () => {
+    const result = await login();
+
+    if (result) {
+      console.log("login Success");
+    } else {
+      Alert.alert("Error", "Failed to login");
+    }
+  };
 
   // # appwrite email : rohil01
   // # google console email:rohil101
