@@ -40,8 +40,43 @@ export async function login() {
 
     //if success then we can parse the newly returned URL to extract the query parametes by saying:
     const url = new URL(browserResult.url);
+
+    const secret = url.searchParams.get("secret")?.toString();
+    const userId = url.searchParams.get("userId")?.toString();
+
+    if (!secret || !userId) throw new Error("Failed to login");
+    const session = await account.createSession(userId, secret);
+
+    if (!session) throw new Error("Failed to create a session");
   } catch (error) {
     console.log(error);
+    return false;
+  }
+}
+
+export async function logout() {
+  try {
+    await account.deleteSession("current");
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+//function to fetch the info of currently logged in user
+export async function getUser() {
+  try {
+    const response = await account.get();
+    if (response.$id) {
+      //then generate a avatar
+      const userAvatar = avatar.getInitials(response.name);
+      return {
+        ...response,
+        avatar: userAvatar.toString(),
+      };
+    }
+  } catch (error) {
+    console.error(error);
     return false;
   }
 }
