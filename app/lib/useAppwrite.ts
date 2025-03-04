@@ -14,9 +14,10 @@ interface UseAppwriteReturn<T, P> {
   refetch: (newParams: P) => Promise<void>;
 }
 
+//Custom hook for managing Appwrite API calls with state handling
 export const useAppwrite = <T, P extends Record<string, string | number>>({
-  fn,
-  params = {} as P,
+  fn, //The asynchronous function to fetch data
+  params = {} as P, //Default fetch parameters
   skip = false,
 }: UseAppwriteOptions<T, P>): UseAppwriteReturn<T, P> => {
   const [data, setData] = useState<T | null>(null);
@@ -40,15 +41,17 @@ export const useAppwrite = <T, P extends Record<string, string | number>>({
         setLoading(false);
       }
     },
-    [fn]
+    [fn] // Memoize the function to ensure stability
   );
 
+  //Automatically fetch data on component mount, unless 'skip'
   useEffect(() => {
     if (!skip) {
       fetchData(params);
     }
   }, []);
 
+  //Refetch function to fetch data with new parameters
   const refetch = async (newParams: P) => await fetchData(newParams);
 
   return { data, loading, error, refetch };

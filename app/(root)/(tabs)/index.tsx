@@ -1,5 +1,6 @@
+import { logout } from "@/app/lib/appwrite";
 import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   return (
@@ -15,6 +16,12 @@ export default function Index() {
       <Link href="/explore">Explore</Link>
       <Link href="/profile">Profile</Link>
       <Link href="/properties/1">Properties</Link>
+      <TouchableOpacity
+        onPress={logout}
+        className="bg-white shadow-md shadow-zinc-300 rounded-full w-full py-4 mt-5"
+      >
+        <Text>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }
