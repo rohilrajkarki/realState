@@ -18,6 +18,7 @@ import { Redirect } from "expo-router";
 const SignIn = () => {
   const { refetch, loading, isLoggedIn } = useGlobalContext();
 
+  console.log("isloggedIn=>", isLoggedIn);
   if (!loading && isLoggedIn) return <Redirect href="/" />;
 
   const handleLogin = async () => {
@@ -49,7 +50,7 @@ const SignIn = () => {
 
         <View className="px-10">
           <Text className="text-base text-center uppercase font-rubik text-black-200">
-            Welcome To Real Scout
+            Welcome To Real Scout.
           </Text>
 
           <Text className="text-3xl font-rubik-bold text-black-300 text-center mt-2">
