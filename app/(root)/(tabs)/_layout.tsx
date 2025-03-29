@@ -51,7 +51,9 @@ const TabsLayout = () => {
         options={{
           title: "Home",
           headerShown: false,
-          tabBarIcon: () => <TabIcon icon={icons.home} title="Home" focused />,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon icon={icons.home} title="Home" focused={focused} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -59,8 +61,8 @@ const TabsLayout = () => {
         options={{
           title: "Home",
           headerShown: false,
-          tabBarIcon: () => (
-            <TabIcon icon={icons.home} title="Explore" focused />
+          tabBarIcon: ({ focused }) => (
+            <TabIcon icon={icons.search} title="Explore" focused={focused} />
           ),
         }}
       />
@@ -69,8 +71,8 @@ const TabsLayout = () => {
         options={{
           title: "profile",
           headerShown: false,
-          tabBarIcon: () => (
-            <TabIcon icon={icons.home} title="Profile" focused />
+          tabBarIcon: ({ focused }) => (
+            <TabIcon icon={icons.person} title="Profile" focused={focused} />
           ),
         }}
       />
