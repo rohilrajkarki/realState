@@ -1,3 +1,4 @@
+import { Card, FeaturedCard } from "@/app/components/Cards";
 import Search from "@/app/components/Search";
 import { logout } from "@/app/lib/appwrite";
 import icons from "@/constants/icons";
@@ -40,6 +41,8 @@ export default function Index() {
             </TouchableOpacity>
           </View>
         </View>
+        <FeaturedCard />
+        <Card />
       </View>
     </SafeAreaView>
   );
