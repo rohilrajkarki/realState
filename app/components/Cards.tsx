@@ -53,7 +53,7 @@ export const Card = ({ onPress }: Props) => {
 
         <View className="flex flex-row items-center justify-between mt-2">
           <Text className="text-base font-rubik-bold text-primary-300">
-            price
+            2000 price
           </Text>
           <Image
             source={icons.heart}

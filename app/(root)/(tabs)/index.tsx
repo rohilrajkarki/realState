@@ -1,4 +1,5 @@
 import { Card, FeaturedCard } from "@/app/components/Cards";
+import Filters from "@/app/components/Filters";
 import Search from "@/app/components/Search";
 import { logout } from "@/app/lib/appwrite";
 import icons from "@/constants/icons";
@@ -40,9 +41,27 @@ export default function Index() {
               </Text>
             </TouchableOpacity>
           </View>
+          <View className="flex flex-row gap-5 mt-5">
+            <FeaturedCard />
+            <FeaturedCard />
+            <FeaturedCard />
+          </View>
         </View>
-        <FeaturedCard />
-        <Card />
+        <View className="flex flex-row items-center justify-between">
+          <Text className="text-xl font-rubik-bold text-black-300">
+            Recomendation
+          </Text>
+          <TouchableOpacity>
+            <Text className="text-base font-rubik-bold text-primary-300">
+              See all
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <Filters />
+        <View className="flex flex-row gap-5 mt-5">
+          <Card />
+          <Card />
+        </View>
       </View>
     </SafeAreaView>
   );
