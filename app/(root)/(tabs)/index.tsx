@@ -3,10 +3,18 @@ import Filters from "@/app/components/Filters";
 import Search from "@/app/components/Search";
 import { logout } from "@/app/lib/appwrite";
 import { useGlobalContext } from "@/app/lib/global-provider";
+import seed from "@/app/lib/seed";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { Link } from "expo-router";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -14,6 +22,7 @@ export default function Index() {
 
   return (
     <SafeAreaView className="bg-white h-full">
+      {/* <Button title="seed" onPress={seed} /> */}
       <FlatList
         data={[1, 2, 3]}
         renderItem={({ item }) => <Card />}

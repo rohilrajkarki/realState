@@ -33,7 +33,7 @@ const facilities = [
   "Gym",
   "Swimming pool",
   "Wifi",
-  "Pet Center",
+  "Pet-friendly",
 ];
 
 function getRandomSubset<T>(
