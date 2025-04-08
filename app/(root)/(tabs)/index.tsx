@@ -1,12 +1,14 @@
 import { Card, FeaturedCard } from "@/app/components/Cards";
 import Filters from "@/app/components/Filters";
 import Search from "@/app/components/Search";
-import { logout } from "@/app/lib/appwrite";
+import { getLatestProperties, getProperties, logout } from "@/app/lib/appwrite";
 import { useGlobalContext } from "@/app/lib/global-provider";
 import seed from "@/app/lib/seed";
+import { useAppwrite } from "@/app/lib/useAppwrite";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
-import { Link } from "expo-router";
+import { Link, router, useLocalSearchParams } from "expo-router";
+import { useEffect } from "react";
 import {
   Button,
   FlatList,
@@ -20,12 +22,39 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
   const { user } = useGlobalContext();
 
+  const params = useLocalSearchParams<{ query?: string; filter?: string }>();
+
+  const { data: latestProperties, loading: latestPropertiesLoading } =
+    useAppwrite({ fn: getLatestProperties });
+
+  const {
+    data: properties,
+    refetch,
+    loading,
+  } = useAppwrite({
+    fn: getProperties,
+    params: { filter: params.filter!, query: params.query!, limit: 6 },
+    skip: true,
+  });
+
+  useEffect(() => {
+    refetch({
+      filter: params.filter!,
+      query: params.query!,
+      limit: 6,
+    });
+  }, [params.filter, params.query]);
+
+  const handleCardPress = (id: string) => router.push(`/properties/${id}`);
+
   return (
     <SafeAreaView className="bg-white h-full">
       {/* <Button title="seed" onPress={seed} /> */}
       <FlatList
-        data={[1, 2, 3]}
-        renderItem={({ item }) => <Card />}
+        data={properties}
+        renderItem={({ item }) => (
+          <Card item={item} onPress={() => handleCardPress(item.$id)} />
+        )}
         keyExtractor={(item) => item.toString()}
         numColumns={2}
         contentContainerClassName="pb-32"
@@ -71,8 +100,13 @@ export default function Index() {
                 <FeaturedCard />
               </View> */}
               <FlatList
-                data={[1, 2, 3]}
-                renderItem={() => <FeaturedCard />}
+                data={latestProperties}
+                renderItem={({ item }) => (
+                  <FeaturedCard
+                    item={item}
+                    onPress={() => handleCardPress(item.$id)}
+                  />
+                )}
                 keyExtractor={(item) => item.toString()}
                 horizontal
                 contentContainerClassName="flex gap-5 mt-5"
