@@ -1,5 +1,6 @@
 import { Card, FeaturedCard } from "@/app/components/Cards";
 import Filters from "@/app/components/Filters";
+import NoResults from "@/app/components/NoResults";
 import Search from "@/app/components/Search";
 import { getLatestProperties, getProperties, logout } from "@/app/lib/appwrite";
 import { useGlobalContext } from "@/app/lib/global-provider";
@@ -10,6 +11,7 @@ import images from "@/constants/images";
 import { Link, router, useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
 import {
+  ActivityIndicator,
   Button,
   FlatList,
   Image,
@@ -57,6 +59,13 @@ export default function Index() {
         )}
         keyExtractor={(item) => item.toString()}
         numColumns={2}
+        ListEmptyComponent={
+          loading ? (
+            <ActivityIndicator size="large" className="text-primary-300 mt-5" />
+          ) : (
+            <NoResults />
+          )
+        }
         contentContainerClassName="pb-32"
         columnWrapperClassName="flex gap-5 px-5"
         showsVerticalScrollIndicator={false}
@@ -99,19 +108,25 @@ export default function Index() {
                 <FeaturedCard />
                 <FeaturedCard />
               </View> */}
-              <FlatList
-                data={latestProperties}
-                renderItem={({ item }) => (
-                  <FeaturedCard
-                    item={item}
-                    onPress={() => handleCardPress(item.$id)}
-                  />
-                )}
-                keyExtractor={(item) => item.toString()}
-                horizontal
-                contentContainerClassName="flex gap-5 mt-5"
-                showsHorizontalScrollIndicator={false}
-              />
+              {latestPropertiesLoading ? (
+                <ActivityIndicator size="large" className="text-primary-300" />
+              ) : !latestProperties || latestProperties.length === 0 ? (
+                <NoResults />
+              ) : (
+                <FlatList
+                  data={latestProperties}
+                  renderItem={({ item }) => (
+                    <FeaturedCard
+                      item={item}
+                      onPress={() => handleCardPress(item.$id)}
+                    />
+                  )}
+                  keyExtractor={(item) => item.toString()}
+                  horizontal
+                  contentContainerClassName="flex gap-5 mt-5"
+                  showsHorizontalScrollIndicator={false}
+                />
+              )}
             </View>
             <View className="flex flex-row items-center justify-between">
               <Text className="text-xl font-rubik-bold text-black-300">
