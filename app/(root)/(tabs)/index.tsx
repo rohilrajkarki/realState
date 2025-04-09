@@ -57,7 +57,7 @@ export default function Index() {
         renderItem={({ item }) => (
           <Card item={item} onPress={() => handleCardPress(item.$id)} />
         )}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={(item) => item.$id}
         numColumns={2}
         ListEmptyComponent={
           loading ? (
@@ -121,7 +121,7 @@ export default function Index() {
                       onPress={() => handleCardPress(item.$id)}
                     />
                   )}
-                  keyExtractor={(item) => item.toString()}
+                  keyExtractor={(item) => item.$id}
                   horizontal
                   contentContainerClassName="flex gap-5 mt-5"
                   showsHorizontalScrollIndicator={false}
