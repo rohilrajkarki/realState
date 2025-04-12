@@ -87,7 +87,7 @@ const Profile = () => {
         </View>
         <View className="flex flex-col mt-5 border-t pt-5 border-primary-200">
           {settings.slice(2).map((item, index) => (
-            <SettingsItem {...item} />
+            <SettingsItem {...item} key={item.title} />
           ))}
         </View>
 

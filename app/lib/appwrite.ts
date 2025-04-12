@@ -31,7 +31,7 @@ client
   .setProject(config.projectId!)
   .setPlatform(config.platform);
 
-export const avatar = new Avatars(client);
+export const avatar = new Avatars(client); //for image avatar
 export const account = new Account(client);
 export const databases = new Databases(client);
 
